@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark-navy shadow-sm sticky-top">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/dashboard">
+      <i class="bi bi-box-seam-fill text-info fs-4"></i>
+      <div class="d-flex flex-column">
+        <span class="fw-bold tracking-wide">ProcureFlow</span>
+        <span class="small-subtitle text-secondary-light">Procurement & Order Management</span>
+      </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="bi bi-speedometer2 me-1"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/suppliers" routerLinkActive="active">
+            <i class="bi bi-building me-1"></i> Suppliers
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/products" routerLinkActive="active">
+            <i class="bi bi-boxes me-1"></i> Products
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/requisitions" routerLinkActive="active">
+            <i class="bi bi-file-earmark-text me-1"></i> Requisitions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/quotations" routerLinkActive="active">
+            <i class="bi bi-receipt me-1"></i> Quotations
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/purchase-orders" routerLinkActive="active">
+            <i class="bi bi-cart-check me-1"></i> Purchase Orders
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

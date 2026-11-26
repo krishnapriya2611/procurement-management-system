@@ -1,0 +1,39 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --proc-primary: #1e3a8a;
+  --proc-primary-hover: #172554;
+  --proc-accent: #0284c7;
+  --proc-bg: #f8fafc;
+  --proc-card-bg: #ffffff;
+  --proc-border: #e2e8f0;
+}
+
+body {
+  background-color: var(--proc-bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+.table th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #475569;
+}
+
+.btn-primary {
+  background-color: var(--proc-primary);
+  border-color: var(--proc-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--proc-primary-hover);
+  border-color: var(--proc-primary-hover);
+}
+
+.card {
+  border: 1px solid var(--proc-border);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+}
