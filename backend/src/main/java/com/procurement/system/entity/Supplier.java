@@ -1,6 +1,8 @@
 package com.procurement.system.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
@@ -12,15 +14,18 @@ public class Supplier {
     @Column(name = "supplier_id")
     private Long supplierId;
 
+    @NotBlank(message = "Supplier code is required")
     @Column(name = "supplier_code", nullable = false, unique = true, length = 50)
     private String supplierCode;
 
+    @NotBlank(message = "Company name is required")
     @Column(name = "company_name", nullable = false, length = 150)
     private String companyName;
 
     @Column(name = "contact_person", length = 100)
     private String contactPerson;
 
+    @Email(message = "Email format is invalid")
     @Column(name = "email", length = 100)
     private String email;
 

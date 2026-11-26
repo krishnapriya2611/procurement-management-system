@@ -4,6 +4,7 @@ import com.procurement.system.dto.PurchaseOrderRequestDTO;
 import com.procurement.system.dto.StatusUpdateDTO;
 import com.procurement.system.entity.PurchaseOrder;
 import com.procurement.system.service.PurchaseOrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +46,7 @@ public class PurchaseOrderController {
     }
 
     @PostMapping
-    public ResponseEntity<PurchaseOrder> createPurchaseOrder(@RequestBody PurchaseOrderRequestDTO dto) {
+    public ResponseEntity<PurchaseOrder> createPurchaseOrder(@Valid @RequestBody PurchaseOrderRequestDTO dto) {
         PurchaseOrder po = new PurchaseOrder();
         po.setPoNumber(dto.getPoNumber());
         po.setOrderDate(dto.getOrderDate());
@@ -58,7 +59,7 @@ public class PurchaseOrderController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PurchaseOrder> updatePurchaseOrder(@PathVariable Long id, @RequestBody PurchaseOrderRequestDTO dto) {
+    public ResponseEntity<PurchaseOrder> updatePurchaseOrder(@PathVariable Long id, @Valid @RequestBody PurchaseOrderRequestDTO dto) {
         PurchaseOrder po = new PurchaseOrder();
         po.setPoNumber(dto.getPoNumber());
         po.setOrderDate(dto.getOrderDate());

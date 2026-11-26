@@ -3,6 +3,7 @@ package com.procurement.system.controller;
 import com.procurement.system.dto.StatusUpdateDTO;
 import com.procurement.system.entity.Supplier;
 import com.procurement.system.service.SupplierService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +35,13 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<Supplier> createSupplier(@RequestBody Supplier supplier) {
+    public ResponseEntity<Supplier> createSupplier(@Valid @RequestBody Supplier supplier) {
         Supplier created = supplierService.createSupplier(supplier);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Supplier> updateSupplier(@PathVariable Long id, @RequestBody Supplier supplier) {
+    public ResponseEntity<Supplier> updateSupplier(@PathVariable Long id, @Valid @RequestBody Supplier supplier) {
         Supplier updated = supplierService.updateSupplier(id, supplier);
         return ResponseEntity.ok(updated);
     }

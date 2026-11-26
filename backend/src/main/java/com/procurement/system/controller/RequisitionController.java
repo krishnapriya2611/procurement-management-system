@@ -3,6 +3,7 @@ package com.procurement.system.controller;
 import com.procurement.system.dto.StatusUpdateDTO;
 import com.procurement.system.entity.PurchaseRequisition;
 import com.procurement.system.service.RequisitionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +35,13 @@ public class RequisitionController {
     }
 
     @PostMapping
-    public ResponseEntity<PurchaseRequisition> createRequisition(@RequestBody PurchaseRequisition requisition) {
+    public ResponseEntity<PurchaseRequisition> createRequisition(@Valid @RequestBody PurchaseRequisition requisition) {
         PurchaseRequisition created = requisitionService.createRequisition(requisition);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PurchaseRequisition> updateRequisition(@PathVariable Long id, @RequestBody PurchaseRequisition requisition) {
+    public ResponseEntity<PurchaseRequisition> updateRequisition(@PathVariable Long id, @Valid @RequestBody PurchaseRequisition requisition) {
         PurchaseRequisition updated = requisitionService.updateRequisition(id, requisition);
         return ResponseEntity.ok(updated);
     }

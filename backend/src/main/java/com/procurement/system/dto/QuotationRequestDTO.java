@@ -1,17 +1,34 @@
 package com.procurement.system.dto;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class QuotationRequestDTO {
 
     private String quotationNumber;
+
+    @NotNull(message = "Supplier ID is required")
     private Long supplierId;
+
+    @NotNull(message = "Requisition ID is required")
     private Long requisitionId;
+
     private LocalDate quotationDate;
+
+    @NotNull(message = "Validity date is required")
     private LocalDate validityDate;
+
+    @NotNull(message = "Quoted amount is required")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Quoted amount cannot be negative")
     private BigDecimal quotedAmount;
+
+    @NotNull(message = "Delivery days is required")
+    @Min(value = 1, message = "Delivery days must be at least 1")
     private Integer deliveryDays;
+
     private String status;
 
     public QuotationRequestDTO() {

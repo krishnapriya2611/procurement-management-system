@@ -5,6 +5,7 @@ import com.procurement.system.dto.QuotationRequestDTO;
 import com.procurement.system.dto.StatusUpdateDTO;
 import com.procurement.system.entity.Quotation;
 import com.procurement.system.service.QuotationService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,7 @@ public class QuotationController {
     }
 
     @PostMapping
-    public ResponseEntity<Quotation> createQuotation(@RequestBody QuotationRequestDTO dto) {
+    public ResponseEntity<Quotation> createQuotation(@Valid @RequestBody QuotationRequestDTO dto) {
         Quotation quotation = new Quotation();
         quotation.setQuotationNumber(dto.getQuotationNumber());
         quotation.setQuotationDate(dto.getQuotationDate());
@@ -60,7 +61,7 @@ public class QuotationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Quotation> updateQuotation(@PathVariable Long id, @RequestBody QuotationRequestDTO dto) {
+    public ResponseEntity<Quotation> updateQuotation(@PathVariable Long id, @Valid @RequestBody QuotationRequestDTO dto) {
         Quotation quotation = new Quotation();
         quotation.setQuotationNumber(dto.getQuotationNumber());
         quotation.setQuotationDate(dto.getQuotationDate());

@@ -1,6 +1,9 @@
 package com.procurement.system.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -13,9 +16,11 @@ public class Product {
     @Column(name = "product_id")
     private Long productId;
 
+    @NotBlank(message = "Product SKU is required")
     @Column(name = "sku", nullable = false, unique = true, length = 50)
     private String sku;
 
+    @NotBlank(message = "Product name is required")
     @Column(name = "product_name", nullable = false, length = 150)
     private String productName;
 
@@ -25,6 +30,8 @@ public class Product {
     @Column(name = "unit", length = 30)
     private String unit;
 
+    @NotNull(message = "Standard price is required")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Standard price cannot be negative")
     @Column(name = "standard_price", nullable = false, precision = 12, scale = 2)
     private BigDecimal standardPrice = BigDecimal.ZERO;
 
