@@ -610,9 +610,11 @@ export class QuotationListComponent implements OnInit {
       next: (res) => {
         q.status = res.status;
         this.successMessage = `Quotation '${q.quotationNumber}' status updated to ${res.status}.`;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to update quotation status.';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -632,9 +634,11 @@ export class QuotationListComponent implements OnInit {
       next: () => {
         this.successMessage = `Quotation '${num}' deleted successfully.`;
         this.loadQuotations();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to delete quotation.';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -663,10 +667,12 @@ export class QuotationListComponent implements OnInit {
       next: (data) => {
         this.comparisonData = data;
         this.isComparing = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to compare quotations.';
         this.isComparing = false;
+        this.cdr.detectChanges();
       }
     });
   }
@@ -689,9 +695,11 @@ export class QuotationListComponent implements OnInit {
         this.successMessage = `Quotation '${q.quotationNumber}' by ${q.supplierCompanyName} accepted.`;
         this.fetchComparisonData();
         this.loadQuotations();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to accept quotation.';
+        this.cdr.detectChanges();
       }
     });
   }

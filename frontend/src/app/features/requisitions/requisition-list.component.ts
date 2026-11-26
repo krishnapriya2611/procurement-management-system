@@ -634,9 +634,11 @@ export class RequisitionListComponent implements OnInit {
       next: (updated) => {
         r.status = updated.status;
         this.successMessage = `Status for '${r.requestNumber}' updated to ${updated.status}.`;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to update status.';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -656,9 +658,11 @@ export class RequisitionListComponent implements OnInit {
       next: () => {
         this.successMessage = `Requisition '${num}' was deleted successfully.`;
         this.loadRequisitions();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to delete requisition.';
+        this.cdr.detectChanges();
       }
     });
   }

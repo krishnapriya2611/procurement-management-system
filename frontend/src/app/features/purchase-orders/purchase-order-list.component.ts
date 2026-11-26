@@ -643,9 +643,11 @@ export class PurchaseOrderListComponent implements OnInit {
       next: (res) => {
         po.status = res.status;
         this.successMessage = `Purchase order '${po.poNumber}' marked as ${res.status}.`;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to update order status.';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -665,9 +667,11 @@ export class PurchaseOrderListComponent implements OnInit {
       next: () => {
         this.successMessage = `Purchase order '${num}' deleted successfully.`;
         this.loadPurchaseOrders();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to delete purchase order.';
+        this.cdr.detectChanges();
       }
     });
   }
