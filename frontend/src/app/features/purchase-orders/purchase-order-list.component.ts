@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PurchaseOrderService } from '../../core/services/purchase-order.service';
@@ -411,7 +411,8 @@ export class PurchaseOrderListComponent implements OnInit {
     private poService: PurchaseOrderService,
     private supplierService: SupplierService,
     private requisitionService: RequisitionService,
-    private quotationService: QuotationService
+    private quotationService: QuotationService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -467,10 +468,12 @@ export class PurchaseOrderListComponent implements OnInit {
             this.orders = data;
           }
           this.isLoading = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Failed to load purchase orders.';
           this.isLoading = false;
+          this.cdr.detectChanges();
         }
       });
     } else {
@@ -478,10 +481,12 @@ export class PurchaseOrderListComponent implements OnInit {
         next: (data) => {
           this.orders = data;
           this.isLoading = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Failed to load purchase orders.';
           this.isLoading = false;
+          this.cdr.detectChanges();
         }
       });
     }

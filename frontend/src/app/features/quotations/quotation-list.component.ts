@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { QuotationService } from '../../core/services/quotation.service';
@@ -423,7 +423,8 @@ export class QuotationListComponent implements OnInit {
     private fb: FormBuilder,
     private quotationService: QuotationService,
     private supplierService: SupplierService,
-    private requisitionService: RequisitionService
+    private requisitionService: RequisitionService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -466,10 +467,12 @@ export class QuotationListComponent implements OnInit {
             this.quotations = data;
           }
           this.isLoading = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Failed to load quotations.';
           this.isLoading = false;
+          this.cdr.detectChanges();
         }
       });
     } else {
@@ -477,10 +480,12 @@ export class QuotationListComponent implements OnInit {
         next: (data) => {
           this.quotations = data;
           this.isLoading = false;
+          this.cdr.detectChanges();
         },
         error: (err) => {
           this.errorMessage = err.error?.message || 'Failed to load quotations.';
           this.isLoading = false;
+          this.cdr.detectChanges();
         }
       });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RequisitionService } from '../../core/services/requisition.service';
@@ -421,7 +421,8 @@ export class RequisitionListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private requisitionService: RequisitionService,
-    private productService: ProductService
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -510,10 +511,12 @@ export class RequisitionListComponent implements OnInit {
       next: (data) => {
         this.requisitions = data;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to load requisitions.';
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }

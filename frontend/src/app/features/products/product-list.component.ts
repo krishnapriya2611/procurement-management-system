@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
@@ -228,7 +228,11 @@ export class ProductListComponent implements OnInit {
     return `Are you sure you want to delete product '${name}' (SKU: ${sku})?`;
   }
 
-  constructor(private productService: ProductService, private fb: FormBuilder) {
+  constructor(
+    private productService: ProductService,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
     this.productForm = this.fb.group({
       sku: ['', Validators.required],
       productName: ['', Validators.required],
@@ -255,10 +259,12 @@ export class ProductListComponent implements OnInit {
       next: (data) => {
         this.products = data;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to load products.';
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }

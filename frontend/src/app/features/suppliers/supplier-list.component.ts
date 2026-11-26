@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SupplierService } from '../../core/services/supplier.service';
@@ -281,7 +281,11 @@ export class SupplierListComponent implements OnInit {
     return `Are you sure you want to delete supplier '${name}'? If this supplier is linked to quotations or orders, deletion will be blocked.`;
   }
 
-  constructor(private supplierService: SupplierService, private fb: FormBuilder) {
+  constructor(
+    private supplierService: SupplierService,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
     this.supplierForm = this.fb.group({
       supplierCode: ['', Validators.required],
       companyName: ['', Validators.required],
@@ -306,10 +310,12 @@ export class SupplierListComponent implements OnInit {
       next: (data) => {
         this.suppliers = data;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to load suppliers.';
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }

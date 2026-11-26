@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { DashboardService } from '../../core/services/dashboard.service';
@@ -218,7 +218,10 @@ export class DashboardComponent implements OnInit {
   isLoading = false;
   errorMessage: string | null = null;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.loadSummary();
@@ -231,10 +234,12 @@ export class DashboardComponent implements OnInit {
       next: (data) => {
         this.summary = data;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Failed to load dashboard metrics from backend.';
         this.isLoading = false;
+        this.cdr.detectChanges();
       }
     });
   }
