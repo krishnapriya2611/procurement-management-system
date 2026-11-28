@@ -1,22 +1,26 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { Quotation, QuotationComparison, QuotationRequest } from '../models/quotation.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuotationService {
-  private readonly baseUrl = `${environment.apiUrl}/quotations`;
+
+  private readonly baseUrl =
+    'https://procurement-management-system-production.up.railway.app/api/quotations';
 
   constructor(private http: HttpClient) {}
 
   getQuotations(status?: string): Observable<Quotation[]> {
     let params = new HttpParams();
+
     if (status && status.trim()) {
       params = params.set('status', status.trim());
     }
+
     return this.http.get<Quotation[]>(this.baseUrl, { params });
   }
 
