@@ -14,7 +14,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedOrigins(
                     "http://localhost:4200",
                     "http://127.0.0.1:4200",
-                    "https://procurement-management-system-lh847ava7-vaishnavi-3989.vercel.app"
+                    "https://procurement-management-system-lh847ava7-vaishnavi-3989.vercel.app",
+                    "https://agent-6b0b0b55f67644c--celebrated-mandazi-62cd3f.netlify.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
